@@ -1,0 +1,8 @@
+RemoteSystemsTempFiles
+.metadata
+eai-core/.settings
+eai-core/target
+eai-core/.classpath
+eai-core/.project
+eai-core/.springBeans
+*/.DS_Store
