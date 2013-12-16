@@ -1,4 +1,4 @@
-package br.com.casadocodigo.eai.modelo;
+package br.com.casadocodigo.eai.modelos;
 
 import java.io.Serializable;
 
@@ -26,4 +26,36 @@ public class ImagemDeProduto implements Serializable {
 
 	@ManyToOne(optional = false)
 	private Produto produto;
+	
+	public ImagemDeProduto() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	
 }

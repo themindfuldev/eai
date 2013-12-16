@@ -1,4 +1,4 @@
-package br.com.casadocodigo.eai.modelo;
+package br.com.casadocodigo.eai.modelos;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,4 +35,52 @@ public class CategoriaDeProduto implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<CategoriaDeProduto> subcategorias;
+	
+	public CategoriaDeProduto() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public CategoriaDeProduto getCategoriaMestre() {
+		return categoriaMestre;
+	}
+
+	public void setCategoriaMestre(CategoriaDeProduto categoriaMestre) {
+		this.categoriaMestre = categoriaMestre;
+	}
+
+	public List<CategoriaDeProduto> getSubcategorias() {
+		return subcategorias;
+	}
+
+	public void setSubcategorias(List<CategoriaDeProduto> subcategorias) {
+		this.subcategorias = subcategorias;
+	}
+	
 }
