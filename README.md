@@ -8,4 +8,4 @@ Instruções
 
 1. Instale o postgresql
 2. Crie um usuário chamado eai, com senha eai e privilégios de criar bancos
-3. Com este usuário, crie um banco de dados chamado eai
+3. Com este usuário, crie um banco de dados chamado eai no schema public
