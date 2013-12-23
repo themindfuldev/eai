@@ -1,4 +1,4 @@
-package br.com.casadocodigo.eai.repositorios;
+package repositories;
 
 import java.util.List;
 

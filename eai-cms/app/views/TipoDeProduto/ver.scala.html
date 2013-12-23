@@ -1,0 +1,22 @@
+@(tipoDeProduto: br.com.casadocodigo.eai.modelos.TipoDeProduto) 
+
+@main("Tipo de Produto") {
+	<table>
+		<tr>
+			<td>Id</td>
+			<td>@tipoDeProduto.getId()</td>
+		</tr>
+		<tr>
+			<td>Ativo</td>
+			<td>@tipoDeProduto.getAtivo()</td>
+		</tr>
+		<tr>
+			<td>Nome</td>
+			<td>@tipoDeProduto.getNome()</td>
+		</tr>
+		<tr>
+			<td>Descricao</td>
+			<td>@tipoDeProduto.getDescricao()</td>
+		</tr>
+	</table>
+}

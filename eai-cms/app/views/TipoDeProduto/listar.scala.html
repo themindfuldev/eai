@@ -1,0 +1,20 @@
+@(tiposDeProduto: List[br.com.casadocodigo.eai.modelos.TipoDeProduto]) 
+
+@main("Tipo de Produto") {
+	<a href="/tipo-de-produto/novo">Criar Tipo de Produto</a>
+	
+	<table>
+		<tr>
+			<td>Id</td>
+			<td>Nome</td>
+			<td>Ativo</td>
+		</tr>
+		<tr>
+			@for(tipoDeProduto <- tiposDeProduto) {
+				<td><a href="/tipo-de-produto/@tipoDeProduto.getId()">@tipoDeProduto.getId()</a></td>
+				<td><a href="/tipo-de-produto/@tipoDeProduto.getId()">@tipoDeProduto.getNome()</a></td>
+				<td><a href="/tipo-de-produto/@tipoDeProduto.getId()">@tipoDeProduto.getAtivo()</a></td> 
+			}
+		</tr>
+	</table>
+}

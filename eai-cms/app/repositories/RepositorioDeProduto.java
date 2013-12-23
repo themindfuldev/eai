@@ -1,4 +1,4 @@
-package br.com.casadocodigo.eai.repositorios;
+package repositories;
 
 import java.util.List;
 
@@ -7,8 +7,12 @@ import br.com.casadocodigo.eai.modelos.Produto;
 
 public class RepositorioDeProduto {
 	@SuppressWarnings("unchecked")
-	public List<Produto> listar() {
-		return JPA.em().createQuery("FROM Produto").getResultList();
+	public List<Produto> listar(int numeroDaPagina, int tamanhoDaPagina) {
+		return JPA.em()
+				.createQuery("FROM Produto")
+				.setFirstResult(numeroDaPagina * tamanhoDaPagina)
+				.setMaxResults(tamanhoDaPagina)
+				.getResultList();
 	}
 	
 	public void remover(Produto produto) {

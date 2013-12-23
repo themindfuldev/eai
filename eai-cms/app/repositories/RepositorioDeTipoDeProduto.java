@@ -1,22 +1,25 @@
-package br.com.casadocodigo.eai.repositorios;
+package repositories;
 
 import java.util.List;
 
 import play.db.jpa.JPA;
-import br.com.casadocodigo.eai.modelos.Produto;
 import br.com.casadocodigo.eai.modelos.TipoDeProduto;
 
 public class RepositorioDeTipoDeProduto {
 	@SuppressWarnings("unchecked")
-	public List<Produto> listar() {
+	public static List<TipoDeProduto> listar() {
 		return JPA.em().createQuery("FROM TipoDeProduto").getResultList();
 	}
 	
-	public void remover(TipoDeProduto tipoDeProduto) {
+	public static TipoDeProduto obter(Long id) {
+		return JPA.em().find(TipoDeProduto.class, id);
+	}
+	
+	public static void remover(TipoDeProduto tipoDeProduto) {
 		JPA.em().remove(tipoDeProduto);
 	}
 	
-	public void salvar(TipoDeProduto tipoDeProduto) {
+	public static void salvar(TipoDeProduto tipoDeProduto) {
 		JPA.em().persist(tipoDeProduto);
 	}
 }
