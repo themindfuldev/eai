@@ -1,20 +1,32 @@
 @(tiposDeProduto: List[br.com.casadocodigo.eai.modelos.TipoDeProduto]) 
 
-@main("Tipo de Produto") {
-	<a href="/tipo-de-produto/novo">Criar Tipo de Produto</a>
-	
-	<table>
-		<tr>
-			<td>Id</td>
-			<td>Nome</td>
-			<td>Ativo</td>
-		</tr>
-		<tr>
-			@for(tipoDeProduto <- tiposDeProduto) {
-				<td><a href="/tipo-de-produto/@tipoDeProduto.getId()">@tipoDeProduto.getId()</a></td>
-				<td><a href="/tipo-de-produto/@tipoDeProduto.getId()">@tipoDeProduto.getNome()</a></td>
-				<td><a href="/tipo-de-produto/@tipoDeProduto.getId()">@tipoDeProduto.getAtivo()</a></td> 
-			}
-		</tr>
-	</table>
+@checkbox(value: Boolean) = {
+  <input type="checkbox" @if(value) { checked } />
+}
+
+@main("Listar Tipo de Produto")("tipo-de-produto") {
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Nome</td>
+        <td>Descrição</td>
+        <td>Ativo</td>
+        <td>Ação</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        @for(tipoDeProduto <- tiposDeProduto) {
+          <td>@tipoDeProduto.getId()</td>
+          <td>@tipoDeProduto.getNome()</td>
+          <td>@tipoDeProduto.getDescricao()</td>
+          <td>@checkbox(tipoDeProduto.getAtivo)</td>
+          <td><a href="/tipo-de-produto/@tipoDeProduto.getId()" class="btn btn-primary">Ver</a></td>
+        }
+      </tr>
+    </tbody>
+  </table>
+  
+  <a href="/tipo-de-produto/novo" class="btn btn-primary">Criar Tipo de Produto</a>
 }

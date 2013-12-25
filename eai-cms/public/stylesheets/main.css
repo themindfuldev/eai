@@ -1,0 +1,24 @@
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,body {
+	overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+div#sidebar {
+	margin-top: 40px;	
+}
+
+table > thead > tr > td {
+	font-weight: bold;
+}
+
+table > tbody > tr > td > input[type=checkbox] {
+	pointer-events: none;
+}

@@ -1,15 +1,17 @@
-@(form: Form[br.com.casadocodigo.eai.modelos.TipoDeProduto])
+@(action: String)(form: Form[br.com.casadocodigo.eai.modelos.TipoDeProduto])
 
 @import helper.twitterBootstrap._
 
-@main("Tipo de Produto") {
+@main(action + " Tipo de Produto")("tipo-de-produto") {
 	@helper.form(action = routes.ControladorDeTipoDeProduto.salvar()) {
 		@helper.inputText(form("nome"), '_label -> "Nome", '_help -> "Insira o nome.")
 		@helper.inputText(form("descricao"), '_label -> "Descrição", '_help -> "Insira a decrição.")
 		@helper.checkbox(form("ativo"), '_label -> "Ativo", '_help -> "O elemento está ativo?")
 		
 		<p>
-            <button type="submit">Criar</button>
+            <button type="submit">Salvar</button>
         </p>
 	}
+	
+	<a href="/tipo-de-produto">Listar Tipos de Produto</a>
 }

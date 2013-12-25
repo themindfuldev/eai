@@ -3,14 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.ControladorInicial.index()
+GET     /                           	controllers.ControladorInicial.index()
 
-GET     /tipo-de-produto/           controllers.ControladorDeTipoDeProduto.listar()
-GET     /tipo-de-produto/novo       controllers.ControladorDeTipoDeProduto.novo()
-GET     /tipo-de-produto/:id        controllers.ControladorDeTipoDeProduto.ver(id: Long)
-POST    /tipo-de-produto/           controllers.ControladorDeTipoDeProduto.salvar()
-PUT     /tipo-de-produto/           controllers.ControladorDeTipoDeProduto.salvar()
-DELETE  /tipo-de-produto/:id        controllers.ControladorDeTipoDeProduto.remover(id: Long)
+GET     /tipo-de-produto            	controllers.ControladorDeTipoDeProduto.listar()
+GET     /tipo-de-produto/novo       	controllers.ControladorDeTipoDeProduto.novo()
+POST    /tipo-de-produto            	controllers.ControladorDeTipoDeProduto.salvar()
+GET     /tipo-de-produto/:id        	controllers.ControladorDeTipoDeProduto.ver(id: Long)
+GET     /tipo-de-produto/:id/editar 	controllers.ControladorDeTipoDeProduto.editar(id: Long)
+GET     /tipo-de-produto/:id/remover	controllers.ControladorDeTipoDeProduto.remover(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file               	controllers.Assets.at(path="/public", file)

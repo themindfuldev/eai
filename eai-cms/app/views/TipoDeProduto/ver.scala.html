@@ -1,6 +1,6 @@
 @(tipoDeProduto: br.com.casadocodigo.eai.modelos.TipoDeProduto) 
 
-@main("Tipo de Produto") {
+@main("Ver Tipo de Produto")("tipo-de-produto") {
 	<table>
 		<tr>
 			<td>Id</td>
@@ -19,4 +19,11 @@
 			<td>@tipoDeProduto.getDescricao()</td>
 		</tr>
 	</table>
+	
+	<ul>
+		<li><a href="/tipo-de-produto/@tipoDeProduto.getId()/editar">Editar</a></li>
+		<li><a href="/tipo-de-produto/@tipoDeProduto.getId()/remover">Remover</a></li>
+	</ul>
+	
+	<a href="/tipo-de-produto">Listar Tipos de Produto</a>
 }
