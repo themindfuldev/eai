@@ -1,0 +1,34 @@
+@(produto: br.com.casadocodigo.eai.modelos.Produto)(implicit message: utils.Message)
+
+@import components._ 
+
+@main("Ver Produto")("produto") {
+  <table class="table table-striped read-only">
+    <thead>
+      <tr>
+        <td class="title">#</td>
+        <td>@produto.getId()</td>
+      </tr>
+      <tr>
+        <td class="title">Nome</td>
+        <td>@produto.getNome()</td>
+      </tr>
+      <tr>
+        <td class="title">Descrição</td>
+        <td>@produto.getDescricao()</td>
+      </tr>
+      <tr>
+        <td class="title">Ativo</td>
+        <td>@checkbox(produto.getAtivo)</td>
+      </tr>
+    </thead>
+  </table>
+
+  <p>  
+    <a href="/produto/@produto.getId()/editar" class="btn btn-primary">Editar</a>
+    <a href="/produto/@produto.getId()/remover" class="btn btn-primary">Remover</a>
+  </p>
+  <p>
+    <a href="/produto" class="btn btn-primary">Listar Produtos</a>
+  </p>
+}

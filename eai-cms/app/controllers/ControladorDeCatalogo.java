@@ -5,82 +5,82 @@ import java.util.List;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Result;
-import repositories.RepositorioDeTipoDeProduto;
+import repositories.RepositorioDeCatalogo;
 import utils.Message;
-import views.html.TipoDeProduto.editar;
-import views.html.TipoDeProduto.listar;
-import views.html.TipoDeProduto.ver;
-import br.com.casadocodigo.eai.modelos.TipoDeProduto;
+import views.html.Catalogo.editar;
+import views.html.Catalogo.listar;
+import views.html.Catalogo.ver;
+import br.com.casadocodigo.eai.modelos.Catalogo;
 
-public class ControladorDeTipoDeProduto extends ControladorMestre {
+public class ControladorDeCatalogo extends ControladorMestre {
 	@play.db.jpa.Transactional
 	public static Result listar() {
 		Message message = null;
 		
-		List<TipoDeProduto> tiposDeProduto = null;
+		List<Catalogo> catalogos = null;
 		try {
-			tiposDeProduto = RepositorioDeTipoDeProduto.listar();
+			catalogos = RepositorioDeCatalogo.listar();
 			
 			message = construirMensagem();
 		}
 		catch (Exception e) {
 			message = new Message(Messages.get("error.list"), "danger");
 		}
-        return ok(listar.render(tiposDeProduto, message));
+        return ok(listar.render(catalogos, message));
     }
 
 	public static Result novo() {
-		Form<TipoDeProduto> form = Form.form(TipoDeProduto.class);
-		TipoDeProduto tipoDeProduto = new TipoDeProduto();
-		tipoDeProduto.setAtivo(true);
-		form = form.fill(tipoDeProduto);
+		Form<Catalogo> form = Form.form(Catalogo.class);
+		Catalogo catalogo = new Catalogo();
+		catalogo.setAtivo(true);
+		form = form.fill(catalogo);
         return ok(editar.render("Criar", form, construirMensagem()));
     }
 	
 	@play.db.jpa.Transactional
 	public static Result ver(Long id) {
 		try {
-			TipoDeProduto tipoDeProduto = RepositorioDeTipoDeProduto.obter(id);
-			if (tipoDeProduto != null) {
-				return ok(ver.render(tipoDeProduto, construirMensagem()));
+			Catalogo catalogo = RepositorioDeCatalogo.obter(id);
+			if (catalogo != null) {
+				return ok(ver.render(catalogo, construirMensagem()));
 			}
 			else {
 				flash("messageText", Messages.get("error.notFound"));
 				flash("messageClass", "danger");
-				return redirect("/tipo-de-produto");
+				return redirect("/catalogo");
 			}
 		} catch (Exception e) {
 			flash("messageText", Messages.get("error.view"));
 			flash("messageClass", "danger");
-			return redirect("/tipo-de-produto");
+			return redirect("/catalogo");
 		}
     }
 	
 	@play.db.jpa.Transactional
 	public static Result editar(Long id) {
-		Form<TipoDeProduto> form = Form.form(TipoDeProduto.class);
+		Form<Catalogo> form = Form.form(Catalogo.class);
 		
 		try {
-			TipoDeProduto tipoDeProduto = RepositorioDeTipoDeProduto.obter(id);
-			if (tipoDeProduto != null) {
-				form = form.fill(RepositorioDeTipoDeProduto.obter(id));
+			Catalogo catalogo = RepositorioDeCatalogo.obter(id);
+			if (catalogo != null) {
+				form = form.fill(RepositorioDeCatalogo.obter(id));
 				return ok(editar.render("Editar", form, construirMensagem()));
 			}
 			else {
 				flash("messageText", Messages.get("error.notFound"));
 				flash("messageClass", "danger");
-				return redirect("/tipo-de-produto");
+				return redirect("/catalogo");
 			}
 		} catch (Exception e) {
 			flash("messageText", Messages.get("error.view"));
 			flash("messageClass", "danger");
-			return redirect("/tipo-de-produto");
+			return redirect("/catalogo");
 		}
     }
 	
 	@play.db.jpa.Transactional
 	public static Result salvar() {
-		Form<TipoDeProduto> form = Form.form(TipoDeProduto.class).bindFromRequest();
+		Form<Catalogo> form = Form.form(Catalogo.class).bindFromRequest();
 		String idValue = form.field("id").value();
 		Long id = idValue.isEmpty() ? null : Long.valueOf(idValue);
 		String acao = (id == null) ? "Criar" : "Editar";
@@ -93,28 +93,28 @@ public class ControladorDeTipoDeProduto extends ControladorMestre {
 			String messageTextKey = (id == null)? "create": "edit"; 
 
 			try {
-				TipoDeProduto tipoDeProduto = null;
+				Catalogo catalogo = null;
 				if (id != null) {
 					Long idLong = Long.valueOf(id);
-					tipoDeProduto = RepositorioDeTipoDeProduto.obter(idLong);
-					if (tipoDeProduto != null) {
-						TipoDeProduto tipoDeProdutoForm = form.get();
-						tipoDeProduto.setAtivo(tipoDeProdutoForm.getAtivo());
-						tipoDeProduto.setNome(tipoDeProdutoForm.getNome());
-						tipoDeProduto.setDescricao(tipoDeProdutoForm.getDescricao());
+					catalogo = RepositorioDeCatalogo.obter(idLong);
+					if (catalogo != null) {
+						Catalogo catalogoForm = form.get();
+						catalogo.setAtivo(catalogoForm.getAtivo());
+						catalogo.setNome(catalogoForm.getNome());
+						catalogo.setDescricao(catalogoForm.getDescricao());
 					}
 					else {
 						return badRequest(editar.render(acao, form, new Message(Messages.get("error.notFound"), "danger")));
 					}
 				} else {
-					tipoDeProduto = form.get();
+					catalogo = form.get();
 				}
 	
-				RepositorioDeTipoDeProduto.salvar(tipoDeProduto);
+				RepositorioDeCatalogo.salvar(catalogo);
 				
 				flash("messageText", Messages.get("success." + messageTextKey));
 				flash("messageClass", "success");
-				return redirect("/tipo-de-produto");
+				return redirect("/catalogo");
 			} catch (Exception e) {
 				flash("messageText", Messages.get("error." + messageTextKey));
 				flash("messageClass", "danger");
@@ -126,9 +126,9 @@ public class ControladorDeTipoDeProduto extends ControladorMestre {
 	@play.db.jpa.Transactional
 	public static Result remover(Long id) {
 		try {
-			TipoDeProduto tipoDeProduto = RepositorioDeTipoDeProduto.obter(id);
-			if (tipoDeProduto != null) {
-				RepositorioDeTipoDeProduto.remover(tipoDeProduto);
+			Catalogo catalogo = RepositorioDeCatalogo.obter(id);
+			if (catalogo != null) {
+				RepositorioDeCatalogo.remover(catalogo);
 				flash("messageText", Messages.get("success.remove"));
 				flash("messageClass", "success");
 			}
@@ -140,7 +140,7 @@ public class ControladorDeTipoDeProduto extends ControladorMestre {
 			flash("messageText", Messages.get("error.remove"));
 			flash("messageClass", "danger");
 		}
-		return redirect("/tipo-de-produto");
+		return redirect("/catalogo");
     }
-	
+		
 }

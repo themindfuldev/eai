@@ -1,10 +1,8 @@
 @(tiposDeProduto: List[br.com.casadocodigo.eai.modelos.TipoDeProduto])(implicit message: utils.Message)
 
-@checkbox(value: Boolean) = {
-  <input type="checkbox" @if(value) { checked } />
-}
+@import components._
 
-@main("Listar Tipo de Produto")("tipo-de-produto") {
+@main("Listar Tipos de Produto")("tipo-de-produto") {
   <table class="table read-only">
     <thead>
       <tr>

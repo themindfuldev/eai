@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import play.data.validation.Constraints;
+
 @SuppressWarnings("serial")
 @Entity
 @SequenceGenerator(name = "imagem_de_produto_seq", sequenceName = "imagem_de_produto_seq")
@@ -19,12 +21,15 @@ public class ImagemDeProduto implements Serializable {
 	public Long id;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Boolean ativo;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String url;
 
 	@ManyToOne(optional = false)
+	@Constraints.Required
 	private Produto produto;
 	
 	public ImagemDeProduto() {

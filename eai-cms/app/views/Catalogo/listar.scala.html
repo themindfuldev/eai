@@ -1,0 +1,30 @@
+@(tiposDeProduto: List[br.com.casadocodigo.eai.modelos.Catalogo])(implicit message: utils.Message)
+
+@import components._ 
+
+@main("Listar Catálogos")("catalogo") {
+  <table class="table read-only">
+    <thead>
+      <tr>
+        <td class="title">#</td>
+        <td class="title">Nome</td>
+        <td class="title">Descriç~o</td>
+        <td class="title">Ativo</td>
+        <td class="title">Ação</td>
+      </tr>
+    </thead>
+    <tbody>
+      @for(catalogo <- tiposDeProduto) {
+        <tr>
+          <td>@catalogo.getId()</td>
+          <td>@catalogo.getNome()</td>
+          <td>@catalogo.getDescricao()</td>
+          <td>@checkbox(catalogo.getAtivo)</td>
+          <td><a href="/catalogo/@catalogo.getId()" class="btn btn-primary">Ver</a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  
+  <a href="/catalogo/novo" class="btn btn-primary">Criar Catálogo</a>
+}

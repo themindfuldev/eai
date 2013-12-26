@@ -7,7 +7,7 @@ import br.com.casadocodigo.eai.modelos.Produto;
 
 public class RepositorioDeProduto {
 	@SuppressWarnings("unchecked")
-	public List<Produto> listar(int numeroDaPagina, int tamanhoDaPagina) {
+	public static List<Produto> listar(int numeroDaPagina, int tamanhoDaPagina) {
 		return JPA.em()
 				.createQuery("FROM Produto")
 				.setFirstResult(numeroDaPagina * tamanhoDaPagina)
@@ -15,11 +15,15 @@ public class RepositorioDeProduto {
 				.getResultList();
 	}
 	
-	public void remover(Produto produto) {
+	public static Produto obter(Long id) {
+		return JPA.em().find(Produto.class, id);
+	}
+	
+	public static void remover(Produto produto) {
 		JPA.em().remove(produto);
 	}
 	
-	public void salvar(Produto produto) {
+	public static void salvar(Produto produto) {
 		JPA.em().persist(produto);
 	}
 }

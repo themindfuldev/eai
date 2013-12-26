@@ -1,0 +1,34 @@
+@(catalogo: br.com.casadocodigo.eai.modelos.Catalogo)(implicit message: utils.Message)
+
+@import components._ 
+
+@main("Ver Catálogo")("catalogo") {
+  <table class="table table-striped read-only">
+    <thead>
+      <tr>
+        <td class="title">#</td>
+        <td>@catalogo.getId()</td>
+      </tr>
+      <tr>
+        <td class="title">Nome</td>
+        <td>@catalogo.getNome()</td>
+      </tr>
+      <tr>
+        <td class="title">Descrição</td>
+        <td>@catalogo.getDescricao()</td>
+      </tr>
+      <tr>
+        <td class="title">Ativo</td>
+        <td>@checkbox(catalogo.getAtivo)</td>
+      </tr>
+    </thead>
+  </table>
+
+  <p>  
+    <a href="/catalogo/@catalogo.getId()/editar" class="btn btn-primary">Editar</a>
+    <a href="/catalogo/@catalogo.getId()/remover" class="btn btn-primary">Remover</a>
+  </p>
+  <p>
+    <a href="/catalogo" class="btn btn-primary">Listar Catálogos</a>
+  </p>
+}

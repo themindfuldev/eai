@@ -3,14 +3,36 @@
 # ~~~~
 
 # Home page
-GET     /                           	controllers.ControladorInicial.index()
+GET     /                           		controllers.ControladorInicial.index()
 
-GET     /tipo-de-produto            	controllers.ControladorDeTipoDeProduto.listar()
-GET     /tipo-de-produto/novo       	controllers.ControladorDeTipoDeProduto.novo()
-POST    /tipo-de-produto	          	controllers.ControladorDeTipoDeProduto.salvar()
-GET     /tipo-de-produto/:id        	controllers.ControladorDeTipoDeProduto.ver(id: Long)
-GET     /tipo-de-produto/:id/editar 	controllers.ControladorDeTipoDeProduto.editar(id: Long)
-GET     /tipo-de-produto/:id/remover	controllers.ControladorDeTipoDeProduto.remover(id: Long)
+GET     /tipo-de-produto            		controllers.ControladorDeTipoDeProduto.listar()
+GET     /tipo-de-produto/novo       		controllers.ControladorDeTipoDeProduto.novo()
+POST    /tipo-de-produto	          		controllers.ControladorDeTipoDeProduto.salvar()
+GET     /tipo-de-produto/:id        		controllers.ControladorDeTipoDeProduto.ver(id: Long)
+GET     /tipo-de-produto/:id/editar 		controllers.ControladorDeTipoDeProduto.editar(id: Long)
+GET     /tipo-de-produto/:id/remover		controllers.ControladorDeTipoDeProduto.remover(id: Long)
+
+GET     /categoria-de-produto            	controllers.ControladorDeCategoriaDeProduto.listar()
+GET     /categoria-de-produto/novo       	controllers.ControladorDeCategoriaDeProduto.novo()
+POST    /categoria-de-produto	          	controllers.ControladorDeCategoriaDeProduto.salvar()
+GET     /categoria-de-produto/:id        	controllers.ControladorDeCategoriaDeProduto.ver(id: Long)
+GET     /categoria-de-produto/:id/editar 	controllers.ControladorDeCategoriaDeProduto.editar(id: Long)
+GET     /categoria-de-produto/:id/remover	controllers.ControladorDeCategoriaDeProduto.remover(id: Long)
+
+GET     /produto							controllers.ControladorDeProduto.listar(numeroDaPagina: Integer = null)
+GET     /produto?p=:p						controllers.ControladorDeProduto.listar(p: Integer)
+GET     /produto/novo       				controllers.ControladorDeProduto.novo()
+POST    /produto	          				controllers.ControladorDeProduto.salvar()
+GET     /produto/:id        				controllers.ControladorDeProduto.ver(id: Long)
+GET     /produto/:id/editar 				controllers.ControladorDeProduto.editar(id: Long)
+GET     /produto/:id/remover				controllers.ControladorDeProduto.remover(id: Long)
+
+GET     /catalogo            				controllers.ControladorDeCatalogo.listar()
+GET     /catalogo/novo       				controllers.ControladorDeCatalogo.novo()
+POST    /catalogo	          				controllers.ControladorDeCatalogo.salvar()
+GET     /catalogo/:id        				controllers.ControladorDeCatalogo.ver(id: Long)
+GET     /catalogo/:id/editar 				controllers.ControladorDeCatalogo.editar(id: Long)
+GET     /catalogo/:id/remover				controllers.ControladorDeCatalogo.remover(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               	controllers.Assets.at(path="/public", file)
+GET     /assets/*file               		controllers.Assets.at(path="/public", file)

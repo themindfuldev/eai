@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import play.data.validation.Constraints;
+
 @SuppressWarnings("serial")
 @Entity
 @SequenceGenerator(name = "item_de_catalogo_seq", sequenceName = "item_de_catalogo_seq")
@@ -20,18 +22,23 @@ public class ItemDeCatalogo implements Serializable {
 	public Long id;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Boolean ativo;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private BigDecimal precoDeVenda;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private BigDecimal prevoDeFabricacao;
 
 	@ManyToOne(optional = false)
+	@Constraints.Required
 	private Catalogo catalogo;
 
 	@ManyToOne(optional = false)
+	@Constraints.Required
 	private Produto produto;
 	
 	public ItemDeCatalogo() {

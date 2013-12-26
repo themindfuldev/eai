@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
+import play.data.validation.Constraints;
+
 @SuppressWarnings("serial")
 @Entity
 @SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq")
@@ -27,18 +29,23 @@ public class Usuario implements Serializable {
 	public Long id;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Boolean ativo;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String nomeDeUsuario;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String senha;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String salt;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String nomeCompleto;
 
 	public Usuario() {

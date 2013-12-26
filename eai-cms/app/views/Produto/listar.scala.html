@@ -1,0 +1,30 @@
+@(tiposDeProduto: List[br.com.casadocodigo.eai.modelos.Produto])(implicit message: utils.Message)
+
+@import components._
+
+@main("Listar Produtos")("produto") {
+  <table class="table read-only">
+    <thead>
+      <tr>
+        <td class="title">#</td>
+        <td class="title">Nome</td>
+        <td class="title">Descrição</td>
+        <td class="title">Ativo</td>
+        <td class="title">Ação</td>
+      </tr>
+    </thead>
+    <tbody>
+      @for(produto <- tiposDeProduto) {
+        <tr>
+          <td>@produto.getId()</td>
+          <td>@produto.getNome()</td>
+          <td>@produto.getDescricao()</td>
+          <td>@checkbox(produto.getAtivo)</td>
+          <td><a href="/produto/@produto.getId()" class="btn btn-primary">Ver</a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  
+  <a href="/produto/novo" class="btn btn-primary">Criar Produto</a>
+}

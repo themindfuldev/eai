@@ -5,82 +5,82 @@ import java.util.List;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Result;
-import repositories.RepositorioDeTipoDeProduto;
+import repositories.RepositorioDeCategoriaDeProduto;
 import utils.Message;
-import views.html.TipoDeProduto.editar;
-import views.html.TipoDeProduto.listar;
-import views.html.TipoDeProduto.ver;
-import br.com.casadocodigo.eai.modelos.TipoDeProduto;
+import views.html.CategoriaDeProduto.editar;
+import views.html.CategoriaDeProduto.listar;
+import views.html.CategoriaDeProduto.ver;
+import br.com.casadocodigo.eai.modelos.CategoriaDeProduto;
 
-public class ControladorDeTipoDeProduto extends ControladorMestre {
+public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 	@play.db.jpa.Transactional
 	public static Result listar() {
 		Message message = null;
 		
-		List<TipoDeProduto> tiposDeProduto = null;
+		List<CategoriaDeProduto> categoriasDeProduto = null;
 		try {
-			tiposDeProduto = RepositorioDeTipoDeProduto.listar();
+			categoriasDeProduto = RepositorioDeCategoriaDeProduto.listar();
 			
 			message = construirMensagem();
 		}
 		catch (Exception e) {
 			message = new Message(Messages.get("error.list"), "danger");
 		}
-        return ok(listar.render(tiposDeProduto, message));
+        return ok(listar.render(categoriasDeProduto, message));
     }
 
 	public static Result novo() {
-		Form<TipoDeProduto> form = Form.form(TipoDeProduto.class);
-		TipoDeProduto tipoDeProduto = new TipoDeProduto();
-		tipoDeProduto.setAtivo(true);
-		form = form.fill(tipoDeProduto);
+		Form<CategoriaDeProduto> form = Form.form(CategoriaDeProduto.class);
+		CategoriaDeProduto categoriaDeProduto = new CategoriaDeProduto();
+		categoriaDeProduto.setAtivo(true);
+		form = form.fill(categoriaDeProduto);
         return ok(editar.render("Criar", form, construirMensagem()));
     }
 	
 	@play.db.jpa.Transactional
 	public static Result ver(Long id) {
 		try {
-			TipoDeProduto tipoDeProduto = RepositorioDeTipoDeProduto.obter(id);
-			if (tipoDeProduto != null) {
-				return ok(ver.render(tipoDeProduto, construirMensagem()));
+			CategoriaDeProduto categoriaDeProduto = RepositorioDeCategoriaDeProduto.obter(id);
+			if (categoriaDeProduto != null) {
+				return ok(ver.render(categoriaDeProduto, construirMensagem()));
 			}
 			else {
 				flash("messageText", Messages.get("error.notFound"));
 				flash("messageClass", "danger");
-				return redirect("/tipo-de-produto");
+				return redirect("/categoria-de-produto");
 			}
 		} catch (Exception e) {
 			flash("messageText", Messages.get("error.view"));
 			flash("messageClass", "danger");
-			return redirect("/tipo-de-produto");
+			return redirect("/categoria-de-produto");
 		}
     }
 	
 	@play.db.jpa.Transactional
 	public static Result editar(Long id) {
-		Form<TipoDeProduto> form = Form.form(TipoDeProduto.class);
+		Form<CategoriaDeProduto> form = Form.form(CategoriaDeProduto.class);
 		
 		try {
-			TipoDeProduto tipoDeProduto = RepositorioDeTipoDeProduto.obter(id);
-			if (tipoDeProduto != null) {
-				form = form.fill(RepositorioDeTipoDeProduto.obter(id));
+			CategoriaDeProduto categoriaDeProduto = RepositorioDeCategoriaDeProduto.obter(id);
+			if (categoriaDeProduto != null) {
+				form = form.fill(RepositorioDeCategoriaDeProduto.obter(id));
 				return ok(editar.render("Editar", form, construirMensagem()));
 			}
 			else {
 				flash("messageText", Messages.get("error.notFound"));
 				flash("messageClass", "danger");
-				return redirect("/tipo-de-produto");
+				return redirect("/categoria-de-produto");
 			}
 		} catch (Exception e) {
 			flash("messageText", Messages.get("error.view"));
 			flash("messageClass", "danger");
-			return redirect("/tipo-de-produto");
+			return redirect("/categoria-de-produto");
 		}
     }
 	
 	@play.db.jpa.Transactional
 	public static Result salvar() {
-		Form<TipoDeProduto> form = Form.form(TipoDeProduto.class).bindFromRequest();
+		Form<CategoriaDeProduto> form = Form.form(CategoriaDeProduto.class).bindFromRequest();
 		String idValue = form.field("id").value();
 		Long id = idValue.isEmpty() ? null : Long.valueOf(idValue);
 		String acao = (id == null) ? "Criar" : "Editar";
@@ -93,28 +93,28 @@ public class ControladorDeTipoDeProduto extends ControladorMestre {
 			String messageTextKey = (id == null)? "create": "edit"; 
 
 			try {
-				TipoDeProduto tipoDeProduto = null;
+				CategoriaDeProduto categoriaDeProduto = null;
 				if (id != null) {
 					Long idLong = Long.valueOf(id);
-					tipoDeProduto = RepositorioDeTipoDeProduto.obter(idLong);
-					if (tipoDeProduto != null) {
-						TipoDeProduto tipoDeProdutoForm = form.get();
-						tipoDeProduto.setAtivo(tipoDeProdutoForm.getAtivo());
-						tipoDeProduto.setNome(tipoDeProdutoForm.getNome());
-						tipoDeProduto.setDescricao(tipoDeProdutoForm.getDescricao());
+					categoriaDeProduto = RepositorioDeCategoriaDeProduto.obter(idLong);
+					if (categoriaDeProduto != null) {
+						CategoriaDeProduto categoriaDeProdutoForm = form.get();
+						categoriaDeProduto.setAtivo(categoriaDeProdutoForm.getAtivo());
+						categoriaDeProduto.setNome(categoriaDeProdutoForm.getNome());
+						categoriaDeProduto.setDescricao(categoriaDeProdutoForm.getDescricao());
 					}
 					else {
 						return badRequest(editar.render(acao, form, new Message(Messages.get("error.notFound"), "danger")));
 					}
 				} else {
-					tipoDeProduto = form.get();
+					categoriaDeProduto = form.get();
 				}
 	
-				RepositorioDeTipoDeProduto.salvar(tipoDeProduto);
+				RepositorioDeCategoriaDeProduto.salvar(categoriaDeProduto);
 				
 				flash("messageText", Messages.get("success." + messageTextKey));
 				flash("messageClass", "success");
-				return redirect("/tipo-de-produto");
+				return redirect("/categoria-de-produto");
 			} catch (Exception e) {
 				flash("messageText", Messages.get("error." + messageTextKey));
 				flash("messageClass", "danger");
@@ -126,9 +126,9 @@ public class ControladorDeTipoDeProduto extends ControladorMestre {
 	@play.db.jpa.Transactional
 	public static Result remover(Long id) {
 		try {
-			TipoDeProduto tipoDeProduto = RepositorioDeTipoDeProduto.obter(id);
-			if (tipoDeProduto != null) {
-				RepositorioDeTipoDeProduto.remover(tipoDeProduto);
+			CategoriaDeProduto categoriaDeProduto = RepositorioDeCategoriaDeProduto.obter(id);
+			if (categoriaDeProduto != null) {
+				RepositorioDeCategoriaDeProduto.remover(categoriaDeProduto);
 				flash("messageText", Messages.get("success.remove"));
 				flash("messageClass", "success");
 			}
@@ -140,7 +140,7 @@ public class ControladorDeTipoDeProduto extends ControladorMestre {
 			flash("messageText", Messages.get("error.remove"));
 			flash("messageClass", "danger");
 		}
-		return redirect("/tipo-de-produto");
+		return redirect("/categoria-de-produto");
     }
 	
 }

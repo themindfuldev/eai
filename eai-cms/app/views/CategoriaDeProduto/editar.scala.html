@@ -1,16 +1,18 @@
-@(action: String)(form: Form[br.com.casadocodigo.eai.modelos.TipoDeProduto])(implicit message: utils.Message)
+@(action: String)(form: Form[br.com.casadocodigo.eai.modelos.CategoriaDeProduto])(implicit message: utils.Message)
 
 @import helper.twitterBootstrap._
 
-@main(action + " Tipo de Produto")("tipo-de-produto") {
-  @helper.form(action = routes.ControladorDeTipoDeProduto.salvar()) {
+@main(action + " Categoria de Produto")("categoria-de-produto") {
+  @helper.form(action = routes.ControladorDeCategoriaDeProduto.salvar()) {
     <input type="hidden" name="id" id="id" value="@form("id").value()">
     @helper.inputText(form("nome"), '_label -> "Nome", 'size -> 30, 'placeholder -> "Digite aqui o nome", '_showConstraints -> false)
     @helper.inputText(form("descricao"), '_label -> "Descrição", 'size -> 100, 'placeholder -> "Digite aqui a descrição", '_showConstraints -> false)
     @helper.checkbox(form("ativo"), '_label -> "Ativo", '_showConstraints -> false)
+  	helper.select(form("categoriaMestre"), ("1"),  '_label -> "Categoria mestre", '_showConstraints -> false)
+    
     <p>
       <button type="submit" class="btn btn-success">Salvar</button>
-      <a href="/tipo-de-produto" class="btn btn-danger">Cancelar</a>
+      <a href="/categoria-de-produto" class="btn btn-danger">Cancelar</a>
     </p>
   }	
 }

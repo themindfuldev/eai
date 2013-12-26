@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import play.data.validation.Constraints;
+
 @SuppressWarnings("serial")
 @Entity
 @SequenceGenerator(name = "catalogo_seq", sequenceName = "catalogo_seq")
@@ -22,18 +24,23 @@ public class Catalogo implements Serializable {
 	public Long id;
 	
 	@Basic(optional = false)
+	@Constraints.Required
 	private Boolean ativo;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String nome;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String descricao;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Date dataDeInicio;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Date dataDeTermino;
 
 	@OneToMany(cascade = CascadeType.REMOVE)

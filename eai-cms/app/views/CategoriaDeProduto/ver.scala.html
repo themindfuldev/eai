@@ -1,0 +1,40 @@
+@(categoriaDeProduto: br.com.casadocodigo.eai.modelos.CategoriaDeProduto)(implicit message: utils.Message)
+
+@import components._ 
+
+@main("Ver Categoria de Produto")("categoria-de-produto") {
+  <table class="table table-striped read-only">
+    <thead>
+      <tr>
+        <td class="title">#</td>
+        <td>@categoriaDeProduto.getId()</td>
+      </tr>
+      <tr>
+        <td class="title">Nome</td>
+        <td>@categoriaDeProduto.getNome()</td>
+      </tr>
+      <tr>
+        <td class="title">Descrição</td>
+        <td>@categoriaDeProduto.getDescricao()</td>
+      </tr>
+      @if(categoriaDeProduto.getCategoriaMestre() != null) {
+        <tr>
+          <td class="title">Categoria Mestre</td>
+          <td>@categoriaDeProduto.getCategoriaMestre().getNome()</td>
+        </tr>
+      }
+      <tr>
+        <td class="title">Ativo</td>
+        <td>@checkbox(categoriaDeProduto.getAtivo)</td>
+      </tr>
+    </thead>
+  </table>
+
+  <p>  
+    <a href="/categoria-de-produto/@categoriaDeProduto.getId()/editar" class="btn btn-primary">Editar</a>
+    <a href="/categoria-de-produto/@categoriaDeProduto.getId()/remover" class="btn btn-primary">Remover</a>
+  </p>
+  <p>
+    <a href="/categoria-de-produto" class="btn btn-primary">Listar Categorias de Produto</a>
+  </p>
+}

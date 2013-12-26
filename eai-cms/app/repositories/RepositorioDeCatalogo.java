@@ -7,19 +7,23 @@ import br.com.casadocodigo.eai.modelos.Catalogo;
 
 public class RepositorioDeCatalogo {
 	@SuppressWarnings("unchecked")
-	public List<Catalogo> listar() {
+	public static List<Catalogo> listar() {
 		return JPA.em().createQuery("FROM Catalogo").getResultList();
 	}
 	
-	public void remover(Catalogo catalogo) {
+	public static Catalogo obter(Long id) {
+		return JPA.em().find(Catalogo.class, id);
+	}
+	
+	public static void remover(Catalogo catalogo) {
 		JPA.em().remove(catalogo);
 	}
 	
-	public void salvar(Catalogo catalogo) {
+	public static void salvar(Catalogo catalogo) {
 		JPA.em().persist(catalogo);
 	}
 	
-	public void definirPadrao(Catalogo catalogoPadrao) {
+	public static void definirPadrao(Catalogo catalogoPadrao) {
 		List<Catalogo> catalogos = listar();
 		
 		for (Catalogo catalogo: catalogos) {

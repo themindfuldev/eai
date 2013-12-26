@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import play.data.validation.Constraints;
+
 @SuppressWarnings("serial")
 @Entity
 @SequenceGenerator(name = "categoria_de_produto_seq", sequenceName = "categoria_de_produto_seq")
@@ -22,15 +24,18 @@ public class CategoriaDeProduto implements Serializable {
 	public Long id;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Boolean ativo;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String nome;
 	
 	@Basic(optional = false)
+	@Constraints.Required
 	private String descricao;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
 	private CategoriaDeProduto categoriaMestre;
 	
 	@OneToMany(cascade = CascadeType.REMOVE)

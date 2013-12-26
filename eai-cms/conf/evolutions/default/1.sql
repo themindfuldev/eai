@@ -6,7 +6,7 @@ CREATE TABLE categoria_de_produto (
     ativo boolean NOT NULL,
     descricao character varying(255) NOT NULL,
     nome character varying(255) NOT NULL,
-    categoria_mestre bigint NOT NULL
+    categoria_mestre bigint
 );
 
 ALTER TABLE public.categoria_de_produto OWNER TO eai;
@@ -242,29 +242,29 @@ ALTER TABLE public.usuario_seq OWNER TO eai;
 
 # --- !Downs
  
-DROP TABLE categoria_de_produto;
+DROP TABLE categoria_de_produto CASCADE;
 DROP SEQUENCE categoria_de_produto_seq;
 
-DROP TABLE categoria_de_produto_subcategoria;
+DROP TABLE categoria_de_produto_subcategorias CASCADE;
 
-DROP TABLE tipo_de_produto;
+DROP TABLE tipo_de_produto CASCADE;
 DROP SEQUENCE tipo_de_produto_seq;
 
-DROP TABLE produto;
+DROP TABLE produto CASCADE;
 DROP SEQUENCE produto_seq;
 
-DROP TABLE imagem_de_produto;
+DROP TABLE imagem_de_produto CASCADE;
 DROP SEQUENCE imagem_de_produto_seq;
 
-DROP TABLE produto_imagens_de_produto;
+DROP TABLE produto_imagens_de_produto CASCADE;
 
-DROP TABLE usuario;
+DROP TABLE usuario CASCADE;
 DROP SEQUENCE usuario_seq;
 
-DROP TABLE catalogo;
+DROP TABLE catalogo CASCADE;
 DROP SEQUENCE catalogo_seq;
 
-DROP TABLE item_de_catalogo;
+DROP TABLE item_de_catalogo CASCADE;
 DROP SEQUENCE item_de_catalogo_seq;
 
 DROP TABLE catalogo_itens_de_catalogo;

@@ -1,0 +1,30 @@
+@(categoriasDeProduto: List[br.com.casadocodigo.eai.modelos.CategoriaDeProduto])(implicit message: utils.Message)
+
+@import components._
+
+@main("Listar Categorias de Produto")("categoria-de-produto") {
+  <table class="table read-only">
+    <thead>
+      <tr>
+        <td class="title">#</td>
+        <td class="title">Nome</td>
+        <td class="title">Descrição</td>
+        <td class="title">Ativo</td>
+        <td class="title">Ação</td>
+      </tr>
+    </thead>
+    <tbody>
+      @for(categoriaDeProduto <- categoriasDeProduto) {
+        <tr>
+          <td>@categoriaDeProduto.getId()</td>
+          <td>@categoriaDeProduto.getNome()</td>
+          <td>@categoriaDeProduto.getDescricao()</td>
+          <td>@checkbox(categoriaDeProduto.getAtivo)</td>
+          <td><a href="/categoria-de-produto/@categoriaDeProduto.getId()" class="btn btn-primary">Ver</a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  
+  <a href="/categoria-de-produto/novo" class="btn btn-primary">Criar Categoria de Produto</a>
+}
