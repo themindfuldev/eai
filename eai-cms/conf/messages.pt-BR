@@ -1,0 +1,63 @@
+#
+# Copyright (C) 2009-2013 Typesafe Inc. <http://www.typesafe.com>
+#
+
+# Default messages
+
+# --- Constraints
+constraint.required=Obrigatório
+constraint.min=Valor mínimo: {0}
+constraint.max=Valor máximo: {0}
+constraint.minLength=Tamanho mínimo: {0}
+constraint.maxLength=Tamanho máximo: {0}
+constraint.email=Email
+
+# --- Formats
+format.date=Data (''{0}'')
+format.numeric=Numérico
+format.real=Real
+
+# --- Errors
+error.invalid=Valor inválido!
+error.invalid.java.util.Date=Valor inválido de data!
+error.required=Este campo é obrigatório!
+error.number=Numérico esperado!
+error.real=Numérico real esperado!
+error.real.precision=Numérico real esperado com até {0} dígito(s) incluindo {1} casa decimal(is).
+error.min=Deve ser maior ou igual a {0}!
+error.min.strict=Deve ser estritamente maior que {0}!
+error.max=Deve ser menor ou igual a {0}!
+error.max.strict=Deve ser estritamente menor que {0}!
+error.minLength=Tamanho mínimo é {0}!
+error.maxLength=Tamanho máximo é {0}!
+error.email=Email válido esperado!
+error.pattern=Deve satisfazer {0}!
+
+error.expected.date=Data esperada!
+error.expected.date.isoformat=Data Iso esperada!
+error.expected.jodadate.format=Data Joda  esperada!
+error.expected.jsarray=Array esperado!
+error.expected.jsboolean=Booleano esperado!
+error.expected.jsnumber=Numérico esperado!
+error.expected.jsobject=Objeto esperado!
+error.expected.jsstring=String esperado!
+error.expected.jsnumberorjsstring=String ou numérico esperado!
+error.expected.keypathnode=Node esperado!
+
+error.path.empty=Caminho vazio
+error.path.missing=Caminho faltando
+error.path.result.multiple=Recursos múltiplos para o caminho dado
+
+error.create=Houve um erro na criação!
+error.edit=Houve um erro na edição!
+error.remove=Houve um erro na remoção!
+error.view=Houve um erro na visualização!
+error.list=Houve um erro na listagem!
+error.notFound=Entidade não encontrada!
+error.validation=Houve algum erro no preenchimento dos campos!
+
+# --- Success
+
+success.create=Criação realizada com sucesso!
+success.edit=Edição realizada com sucesso!
+success.remove=Remoção realizada com sucesso!

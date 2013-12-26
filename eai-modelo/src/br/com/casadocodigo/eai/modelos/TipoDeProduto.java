@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import play.data.validation.Constraints;
+
 @SuppressWarnings("serial")
 @Entity
 @SequenceGenerator(name = "tipo_de_produto_seq", sequenceName = "tipo_de_produto_seq")
@@ -18,19 +20,26 @@ public class TipoDeProduto implements Serializable {
 	public Long id;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private Boolean ativo;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String nome;
 
 	@Basic(optional = false)
+	@Constraints.Required
 	private String descricao;
 	
 	public TipoDeProduto() {
 	}
-
+	
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Boolean getAtivo() {

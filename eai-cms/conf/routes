@@ -7,7 +7,7 @@ GET     /                           	controllers.ControladorInicial.index()
 
 GET     /tipo-de-produto            	controllers.ControladorDeTipoDeProduto.listar()
 GET     /tipo-de-produto/novo       	controllers.ControladorDeTipoDeProduto.novo()
-POST    /tipo-de-produto            	controllers.ControladorDeTipoDeProduto.salvar()
+POST    /tipo-de-produto	          	controllers.ControladorDeTipoDeProduto.salvar()
 GET     /tipo-de-produto/:id        	controllers.ControladorDeTipoDeProduto.ver(id: Long)
 GET     /tipo-de-produto/:id/editar 	controllers.ControladorDeTipoDeProduto.editar(id: Long)
 GET     /tipo-de-produto/:id/remover	controllers.ControladorDeTipoDeProduto.remover(id: Long)

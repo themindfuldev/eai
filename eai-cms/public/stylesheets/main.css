@@ -15,10 +15,14 @@ div#sidebar {
 	margin-top: 40px;	
 }
 
-table > thead > tr > td {
+table tr > td.title {
 	font-weight: bold;
 }
 
-table > tbody > tr > td > input[type=checkbox] {
+table.read-only input[type=checkbox] {
 	pointer-events: none;
+}
+
+form span.help-inline {
+	color: red;
 }
