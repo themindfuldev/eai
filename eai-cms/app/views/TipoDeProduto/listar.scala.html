@@ -6,7 +6,6 @@
   <table class="table read-only">
     <thead>
       <tr>
-        <td class="title">#</td>
         <td class="title">Nome</td>
         <td class="title">Descrição</td>
         <td class="title">Ativo</td>
@@ -16,7 +15,6 @@
     <tbody>
       @for(tipoDeProduto <- tiposDeProduto) {
         <tr>
-          <td>@tipoDeProduto.getId()</td>
           <td>@tipoDeProduto.getNome()</td>
           <td>@tipoDeProduto.getDescricao()</td>
           <td>@checkbox(tipoDeProduto.getAtivo)</td>

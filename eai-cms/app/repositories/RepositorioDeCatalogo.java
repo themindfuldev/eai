@@ -8,7 +8,7 @@ import br.com.casadocodigo.eai.modelos.Catalogo;
 public class RepositorioDeCatalogo {
 	@SuppressWarnings("unchecked")
 	public static List<Catalogo> listar() {
-		return JPA.em().createQuery("FROM Catalogo").getResultList();
+		return JPA.em().createQuery("FROM Catalogo ORDER BY nome ASC").getResultList();
 	}
 	
 	public static Catalogo obter(Long id) {

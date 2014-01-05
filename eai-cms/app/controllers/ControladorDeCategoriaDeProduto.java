@@ -29,12 +29,17 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
         return ok(listar.render(categoriasDeProduto, message));
     }
 
+	@play.db.jpa.Transactional
 	public static Result novo() {
 		Form<CategoriaDeProduto> form = Form.form(CategoriaDeProduto.class);
+		
 		CategoriaDeProduto categoriaDeProduto = new CategoriaDeProduto();
 		categoriaDeProduto.setAtivo(true);
 		form = form.fill(categoriaDeProduto);
-        return ok(editar.render("Criar", form, construirMensagem()));
+		
+		List<CategoriaDeProduto> possiveisMestres = RepositorioDeCategoriaDeProduto.listarPossiveisMestres(null);
+
+		return ok(editar.render("Criar", form, possiveisMestres, construirMensagem()));
     }
 	
 	@play.db.jpa.Transactional
@@ -64,7 +69,10 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 			CategoriaDeProduto categoriaDeProduto = RepositorioDeCategoriaDeProduto.obter(id);
 			if (categoriaDeProduto != null) {
 				form = form.fill(RepositorioDeCategoriaDeProduto.obter(id));
-				return ok(editar.render("Editar", form, construirMensagem()));
+				
+				List<CategoriaDeProduto> possiveisMestres = RepositorioDeCategoriaDeProduto.listarPossiveisMestres(id);
+				
+				return ok(editar.render("Editar", form, possiveisMestres, construirMensagem()));
 			}
 			else {
 				flash("messageText", Messages.get("error.notFound"));
@@ -84,11 +92,13 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 		String idValue = form.field("id").value();
 		Long id = idValue.isEmpty() ? null : Long.valueOf(idValue);
 		String acao = (id == null) ? "Criar" : "Editar";
+		List<CategoriaDeProduto> possiveisMestres = RepositorioDeCategoriaDeProduto.listarPossiveisMestres(id);
 		
 		if (form.hasErrors()) {
 			flash("messageText", Messages.get("error.validation"));
 			flash("messageClass", "danger");
-		    return badRequest(editar.render(acao, form, construirMensagem()));
+			
+		    return badRequest(editar.render(acao, form, possiveisMestres, construirMensagem()));
 		} else {
 			String messageTextKey = (id == null)? "create": "edit"; 
 
@@ -104,7 +114,7 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 						categoriaDeProduto.setDescricao(categoriaDeProdutoForm.getDescricao());
 					}
 					else {
-						return badRequest(editar.render(acao, form, new Message(Messages.get("error.notFound"), "danger")));
+						return badRequest(editar.render(acao, form, possiveisMestres, new Message(Messages.get("error.notFound"), "danger")));
 					}
 				} else {
 					categoriaDeProduto = form.get();
@@ -118,7 +128,7 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 			} catch (Exception e) {
 				flash("messageText", Messages.get("error." + messageTextKey));
 				flash("messageClass", "danger");
-				return badRequest(editar.render(acao, form, new Message(Messages.get("error.notFound"), "danger")));
+				return badRequest(editar.render(acao, form,  possiveisMestres,new Message(Messages.get("error.notFound"), "danger")));
 			}
 		}
     }

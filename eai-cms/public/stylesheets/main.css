@@ -11,6 +11,10 @@ body {
 	padding-bottom: 20px;
 }
 
+div#header div.form-group {
+	padding-right: 5px;
+}
+
 div#sidebar {
 	margin-top: 40px;	
 }

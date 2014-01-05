@@ -17,10 +17,10 @@ import play.data.validation.Constraints;
 
 @SuppressWarnings("serial")
 @Entity
-@SequenceGenerator(name = "catalogo_seq", sequenceName = "catalogo_seq")
 public class Catalogo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "catalogo_seq")
+	@SequenceGenerator(name = "catalogo_seq", sequenceName = "catalogo_seq", allocationSize = 1)
 	public Long id;
 	
 	@Basic(optional = false)

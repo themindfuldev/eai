@@ -18,7 +18,6 @@ import play.data.validation.Constraints;
 
 @SuppressWarnings("serial")
 @Entity
-@SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq")
 public class Usuario implements Serializable {
 
 	@Transient
@@ -26,6 +25,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
+	@SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq", allocationSize = 1)
 	public Long id;
 
 	@Basic(optional = false)

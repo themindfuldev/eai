@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,10 +16,10 @@ import play.data.validation.Constraints;
 
 @SuppressWarnings("serial")
 @Entity
-@SequenceGenerator(name = "item_de_catalogo_seq", sequenceName = "item_de_catalogo_seq")
 public class ItemDeCatalogo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_de_catalogo_seq")
+	@SequenceGenerator(name = "item_de_catalogo_seq", sequenceName = "item_de_catalogo_seq", allocationSize = 1)
 	public Long id;
 
 	@Basic(optional = false)
@@ -31,13 +32,13 @@ public class ItemDeCatalogo implements Serializable {
 
 	@Basic(optional = false)
 	@Constraints.Required
-	private BigDecimal prevoDeFabricacao;
+	private BigDecimal precoDeFabricacao;
 
 	@ManyToOne(optional = false)
 	@Constraints.Required
 	private Catalogo catalogo;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@Constraints.Required
 	private Produto produto;
 	
@@ -69,11 +70,11 @@ public class ItemDeCatalogo implements Serializable {
 	}
 
 	public BigDecimal getPrevoDeFabricacao() {
-		return prevoDeFabricacao;
+		return precoDeFabricacao;
 	}
 
 	public void setPrevoDeFabricacao(BigDecimal prevoDeFabricacao) {
-		this.prevoDeFabricacao = prevoDeFabricacao;
+		this.precoDeFabricacao = prevoDeFabricacao;
 	}
 
 	public Catalogo getCatalogo() {

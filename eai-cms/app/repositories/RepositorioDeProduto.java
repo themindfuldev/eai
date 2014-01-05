@@ -9,7 +9,7 @@ public class RepositorioDeProduto {
 	@SuppressWarnings("unchecked")
 	public static List<Produto> listar(int numeroDaPagina, int tamanhoDaPagina) {
 		return JPA.em()
-				.createQuery("FROM Produto")
+				.createQuery("FROM Produto ORDER BY nome ASC")
 				.setFirstResult(numeroDaPagina * tamanhoDaPagina)
 				.setMaxResults(tamanhoDaPagina)
 				.getResultList();

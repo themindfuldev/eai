@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,10 +18,10 @@ import play.data.validation.Constraints;
 
 @SuppressWarnings("serial")
 @Entity
-@SequenceGenerator(name = "produto_seq", sequenceName = "produto_seq")
 public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
+	@SequenceGenerator(name = "produto_seq", sequenceName = "produto_seq", allocationSize = 1)
 	public Long id;
 
 	@Basic(optional = false)
@@ -35,15 +36,15 @@ public class Produto implements Serializable {
 	@Constraints.Required
 	private String descricao;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@Constraints.Required
 	private TipoDeProduto tipoDeProduto;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@Constraints.Required
 	private CategoriaDeProduto categoriaDeProduto;
 
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<ImagemDeProduto> imagensDeProduto;
 
 	public Produto() {

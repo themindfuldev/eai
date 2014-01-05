@@ -8,7 +8,7 @@ import br.com.casadocodigo.eai.modelos.TipoDeProduto;
 public class RepositorioDeTipoDeProduto {
 	@SuppressWarnings("unchecked")
 	public static List<TipoDeProduto> listar() {
-		return JPA.em().createQuery("FROM TipoDeProduto").getResultList();
+		return JPA.em().createQuery("FROM TipoDeProduto ORDER BY nome ASC").getResultList();
 	}
 	
 	public static TipoDeProduto obter(Long id) {

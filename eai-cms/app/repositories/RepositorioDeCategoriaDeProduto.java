@@ -8,7 +8,7 @@ import br.com.casadocodigo.eai.modelos.CategoriaDeProduto;
 public class RepositorioDeCategoriaDeProduto {
 	@SuppressWarnings("unchecked")
 	public static List<CategoriaDeProduto> listar() {
-		return JPA.em().createQuery("FROM CategoriaDeProduto").getResultList();
+		return JPA.em().createQuery("FROM CategoriaDeProduto ORDER BY nome ASC").getResultList();
 	}
 	
 	public static CategoriaDeProduto obter(Long id) {
@@ -17,7 +17,15 @@ public class RepositorioDeCategoriaDeProduto {
 	
 	@SuppressWarnings("unchecked")
 	public static List<CategoriaDeProduto> listarPossiveisMestres(Long id) {
-		return JPA.em().createQuery("FROM CategoriaDeProduto c WHERE c.id != " + id + " AND c.categoriaMestre == null ORDER BY c.nome").getResultList();
+		StringBuilder query = new StringBuilder();
+		
+		query.append("FROM CategoriaDeProduto c WHERE c.categoriaMestre = null");
+		if (id != null) {
+			query.append(" AND c.id != " + id);
+		}
+		query.append(" ORDER BY c.nome");
+		
+		return JPA.em().createQuery(query.toString()).getResultList();
 	}
 	
 	public static void remover(CategoriaDeProduto categoriaDeProduto) {

@@ -14,10 +14,10 @@ import play.data.validation.Constraints;
 
 @SuppressWarnings("serial")
 @Entity
-@SequenceGenerator(name = "imagem_de_produto_seq", sequenceName = "imagem_de_produto_seq")
 public class ImagemDeProduto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagem_de_produto_seq")
+	@SequenceGenerator(name = "imagem_de_produto_seq", sequenceName = "imagem_de_produto_seq", allocationSize = 1)
 	public Long id;
 
 	@Basic(optional = false)

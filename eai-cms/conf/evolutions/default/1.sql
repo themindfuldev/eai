@@ -187,7 +187,7 @@ CREATE TABLE item_de_catalogo (
     id bigint NOT NULL,
     ativo boolean NOT NULL,
     preco_de_venda numeric(19,2) NOT NULL,
-    prevo_de_fabricacao numeric(19,2) NOT NULL,
+    preco_de_fabricacao numeric(19,2) NOT NULL,
     catalogo bigint NOT NULL,
     produto bigint NOT NULL
 );

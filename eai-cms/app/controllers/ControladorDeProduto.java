@@ -21,7 +21,7 @@ public class ControladorDeProduto extends ControladorMestre {
 		Message message = null;
 		List<Produto> produtos = null;
 		
-		numeroDaPagina = numeroDaPagina != null ? numeroDaPagina : 0;
+		numeroDaPagina = numeroDaPagina != null ? numeroDaPagina : new Integer(0);
 		try {
 			produtos = RepositorioDeProduto.listar(numeroDaPagina,
 					TAMANHO_DA_PAGINA);

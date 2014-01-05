@@ -17,7 +17,7 @@ import play.data.validation.Constraints;
 
 @SuppressWarnings("serial")
 @Entity
-@SequenceGenerator(name = "categoria_de_produto_seq", sequenceName = "categoria_de_produto_seq")
+@SequenceGenerator(name = "categoria_de_produto_seq", sequenceName = "categoria_de_produto_seq", allocationSize = 1)
 public class CategoriaDeProduto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_de_produto_seq")
