@@ -1,4 +1,4 @@
-@(action: String)(form: Form[br.com.casadocodigo.eai.modelos.CategoriaDeProduto])(possiveisMestres: List[br.com.casadocodigo.eai.modelos.CategoriaDeProduto])(implicit message: utils.Message)
+@(action: String)(form: Form[br.com.casadocodigo.eai.modelos.CategoriaDeProduto])(possiveisMestres: Map[String, String])(implicit message: utils.Message)
 
 @import helper.twitterBootstrap._
 
@@ -8,7 +8,7 @@
     @helper.inputText(form("nome"), '_label -> "Nome", 'size -> 30, 'placeholder -> "Digite aqui o nome", '_showConstraints -> false)
     @helper.inputText(form("descricao"), '_label -> "Descrição", 'size -> 100, 'placeholder -> "Digite aqui a descrição", '_showConstraints -> false)
     @helper.checkbox(form("ativo"), '_label -> "Ativo", '_showConstraints -> false)
-  	helper.select(form("categoriaMestre"), ("1"),  '_label -> "Categoria mestre", '_showConstraints -> false)
+  	@helper.select(form("categoriaMestre"), helper.options(possiveisMestres), '_label -> "Categoria mestre", '_showConstraints -> false)
     
     <p>
       <button type="submit" class="btn btn-success">Salvar</button>

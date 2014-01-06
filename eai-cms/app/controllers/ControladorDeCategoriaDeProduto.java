@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import play.data.Form;
 import play.i18n.Messages;
@@ -38,10 +40,21 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 		form = form.fill(categoriaDeProduto);
 		
 		List<CategoriaDeProduto> possiveisMestres = RepositorioDeCategoriaDeProduto.listarPossiveisMestres(null);
+		Map<String, String> opcoesPossiveisMestres = construirOpcoesPossiveisMestres(possiveisMestres);
 
-		return ok(editar.render("Criar", form, possiveisMestres, construirMensagem()));
+		return ok(editar.render("Criar", form, opcoesPossiveisMestres, construirMensagem()));
     }
 	
+	private static Map<String, String> construirOpcoesPossiveisMestres(
+			List<CategoriaDeProduto> possiveisMestres) {
+		Map<String, String> opcoes = new LinkedHashMap<>();
+		opcoes.put("", "Nenhuma");
+		for (CategoriaDeProduto categoriaDeProduto: possiveisMestres) {
+			opcoes.put(categoriaDeProduto.getId().toString(), categoriaDeProduto.getNome());
+		}
+		return opcoes;
+	}
+
 	@play.db.jpa.Transactional
 	public static Result ver(Long id) {
 		try {
@@ -71,8 +84,9 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 				form = form.fill(RepositorioDeCategoriaDeProduto.obter(id));
 				
 				List<CategoriaDeProduto> possiveisMestres = RepositorioDeCategoriaDeProduto.listarPossiveisMestres(id);
+				Map<String, String> opcoesPossiveisMestres = construirOpcoesPossiveisMestres(possiveisMestres);
 				
-				return ok(editar.render("Editar", form, possiveisMestres, construirMensagem()));
+				return ok(editar.render("Editar", form, opcoesPossiveisMestres, construirMensagem()));
 			}
 			else {
 				flash("messageText", Messages.get("error.notFound"));
@@ -93,12 +107,13 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 		Long id = idValue.isEmpty() ? null : Long.valueOf(idValue);
 		String acao = (id == null) ? "Criar" : "Editar";
 		List<CategoriaDeProduto> possiveisMestres = RepositorioDeCategoriaDeProduto.listarPossiveisMestres(id);
+		Map<String, String> opcoesPossiveisMestres = construirOpcoesPossiveisMestres(possiveisMestres);
 		
 		if (form.hasErrors()) {
 			flash("messageText", Messages.get("error.validation"));
 			flash("messageClass", "danger");
 			
-		    return badRequest(editar.render(acao, form, possiveisMestres, construirMensagem()));
+		    return badRequest(editar.render(acao, form, opcoesPossiveisMestres, construirMensagem()));
 		} else {
 			String messageTextKey = (id == null)? "create": "edit"; 
 
@@ -112,13 +127,17 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 						categoriaDeProduto.setAtivo(categoriaDeProdutoForm.getAtivo());
 						categoriaDeProduto.setNome(categoriaDeProdutoForm.getNome());
 						categoriaDeProduto.setDescricao(categoriaDeProdutoForm.getDescricao());
+						categoriaDeProduto.setCategoriaMestreId(categoriaDeProdutoForm.getCategoriaMestreId());						
 					}
 					else {
-						return badRequest(editar.render(acao, form, possiveisMestres, new Message(Messages.get("error.notFound"), "danger")));
+						return badRequest(editar.render(acao, form, opcoesPossiveisMestres, new Message(Messages.get("error.notFound"), "danger")));
 					}
 				} else {
 					categoriaDeProduto = form.get();
 				}
+				
+				CategoriaDeProduto categoriaMestre = RepositorioDeCategoriaDeProduto.obter(categoriaDeProduto.getCategoriaMestreId()); 
+				categoriaDeProduto.setCategoriaMestre(categoriaMestre);
 	
 				RepositorioDeCategoriaDeProduto.salvar(categoriaDeProduto);
 				
@@ -128,7 +147,7 @@ public class ControladorDeCategoriaDeProduto extends ControladorMestre {
 			} catch (Exception e) {
 				flash("messageText", Messages.get("error." + messageTextKey));
 				flash("messageClass", "danger");
-				return badRequest(editar.render(acao, form,  possiveisMestres,new Message(Messages.get("error.notFound"), "danger")));
+				return badRequest(editar.render(acao, form,  opcoesPossiveisMestres,new Message(Messages.get("error.notFound"), "danger")));
 			}
 		}
     }

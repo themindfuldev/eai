@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import play.data.validation.Constraints;
 
@@ -35,6 +36,9 @@ public class CategoriaDeProduto implements Serializable {
 	@Constraints.Required
 	private String descricao;
 	
+	@Transient
+	private Long categoriaMestreId;
+	
 	@ManyToOne
 	private CategoriaDeProduto categoriaMestre;
 	
@@ -51,7 +55,7 @@ public class CategoriaDeProduto implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -74,6 +78,14 @@ public class CategoriaDeProduto implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public Long getCategoriaMestreId() {
+		return categoriaMestreId;
+	}
+
+	public void setCategoriaMestreId(Long categoriaMestreId) {
+		this.categoriaMestreId = categoriaMestreId;
 	}
 
 	public CategoriaDeProduto getCategoriaMestre() {
